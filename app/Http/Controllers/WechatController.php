@@ -9,6 +9,10 @@ use Log;
 
 class WechatController extends Controller
 {
+    /**
+     * 处理微信请求的信息
+     * @return mixed
+     */
     public function serve()
     {
         Log::info('request arrived.'); # 注意：Log 为 Laravel 组件，所以它记的日志去 Laravel 日志看，而不是 EasyWeChat 日志
@@ -23,6 +27,10 @@ class WechatController extends Controller
         return $wechat->server->serve();
     }
 
+    /**
+     * 添加菜单
+     *
+     */
     public function addMenu()
     {
         $app = app('wechat');
@@ -30,8 +38,9 @@ class WechatController extends Controller
         $buttons = [
             [
                 "type" => "click",
-                "name" => "今日歌曲",
-                "key"  => "V1001_TODAY_MUSIC"
+                "name" => "我的博客",
+                "key"  => "V1001_TODAY_MUSIC",
+                "url"  => "http://119.23.60.21/blog"
             ],
             [
                 "name"       => "菜单",
@@ -55,5 +64,15 @@ class WechatController extends Controller
             ],
         ];
         $menu->add($buttons);
+    }
+
+    /**
+     * 查看微信公众号当前的菜单
+     */
+    public  function  showMenu(){
+        $app = app('wechat');
+        $menu = $app->menu;
+        $menus = $menu->all();
+        var_dump($menus);
     }
 }

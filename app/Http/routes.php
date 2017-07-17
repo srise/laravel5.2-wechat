@@ -18,3 +18,4 @@ Route::get('/', function () {
 Route::any('/wechat', 'WechatController@serve');
 
 Route::any('/wechat/addMenu', 'WechatController@addMenu');
+Route::any('/wechat/showMenu', 'WechatController@showMenu');
